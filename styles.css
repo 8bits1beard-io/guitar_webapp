@@ -1,0 +1,763 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #10b981;
+    --bg: #f3f4f6;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --radius: 8px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    touch-action: manipulation;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: var(--surface);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.instrument-toggle {
+    display: flex;
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 0.2rem;
+    border: 1px solid var(--border);
+}
+
+.instrument-btn {
+    padding: 0.4rem 0.8rem;
+    background: none;
+    border: none;
+    border-radius: calc(var(--radius) - 2px);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.instrument-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.instrument-btn:hover:not(.active) {
+    background: var(--border);
+    color: var(--text);
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.nav-tabs {
+    background: var(--surface);
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 80px;
+    z-index: 99;
+}
+
+.nav-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.nav-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.search-box {
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.search-box button,
+.search-filters button {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-box button:active,
+.search-filters button:active {
+    background: var(--primary-dark);
+}
+
+.welcome-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.welcome-section h2 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.welcome-section p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.social-links-mini {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.social-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+}
+
+.social-mini:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.social-mini:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    border-color: transparent;
+}
+
+.featured h2 {
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.featured:not(:first-child) {
+    margin-top: 2.5rem;
+}
+
+.chord-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.chord-card {
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.chord-card:active {
+    transform: scale(0.98);
+}
+
+.chord-mini {
+    margin-bottom: 0.5rem;
+}
+
+.chord-card-info h3 {
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.chord-card-info .difficulty {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--bg);
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.progression-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.progression-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.progression-card:active {
+    transform: scale(0.98);
+}
+
+.progression-card h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.progression-card p {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.progression-card .description {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.search-filters {
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+}
+
+.search-filters input,
+.search-filters select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+}
+
+.results {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.lesson-intro {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+}
+
+.lesson-intro h2 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.lessons-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.lesson-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.lesson-card:active {
+    transform: scale(0.98);
+}
+
+.lesson-illustration {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 100px;
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 0.5rem;
+}
+
+.lesson-illustration svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.lesson-content {
+    flex: 1;
+}
+
+.lesson-content h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.lesson-content p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.library-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.saved-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.viewer-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    margin-bottom: 1rem;
+}
+
+.viewer-header button {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+#saveBtn {
+    background: var(--secondary);
+    color: white;
+    border: none;
+}
+
+.chord-info {
+    padding: 1rem;
+    background: var(--surface);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.chord-info h2 {
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+}
+
+.chord-info p {
+    color: var(--text-light);
+}
+
+.chord-diagram-container {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius);
+}
+
+#chordDiagram {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: white;
+    max-width: 100%;
+    height: auto;
+}
+
+.chord-details {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.finger-positions,
+.chord-variations,
+.chord-theory {
+    background: var(--surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+}
+
+.finger-positions h3,
+.chord-variations h3,
+.chord-theory h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.finger-positions p,
+.chord-theory p {
+    margin-bottom: 0.5rem;
+}
+
+.variations-grid {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+}
+
+.controls button {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.75rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.controls button:active {
+    background: var(--primary-dark);
+}
+
+.social-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.social-section h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.social-section p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+    min-width: 80px;
+    border: 1px solid var(--border);
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.social-link:active {
+    transform: scale(0.95);
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.social-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+@media (max-width: 480px) {
+    .header {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .header h1 {
+        order: 1;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .instrument-toggle {
+        order: 2;
+    }
+    
+    .menu-btn {
+        order: 3;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+    
+    .instrument-btn {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .lesson-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .lesson-illustration {
+        width: 100%;
+        height: 120px;
+        margin: 0 auto;
+    }
+    
+    .nav-tabs {
+        top: 120px;
+    }
+}
+
+@media (min-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .instrument-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .chord-grid,
+    .results,
+    .lessons-list,
+    .saved-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .search-box {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .search-box input {
+        flex: 1;
+        margin-bottom: 0;
+    }
+    
+    .search-box button {
+        width: auto;
+        padding: 0.75rem 2rem;
+    }
+    
+    .search-filters {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .search-filters input,
+    .search-filters select {
+        flex: 1;
+        margin-bottom: 0;
+    }
+    
+    .search-filters button {
+        width: auto;
+        padding: 0.75rem 2rem;
+    }
+    
+    .chord-details {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .controls {
+        justify-content: center;
+    }
+    
+    .controls button {
+        flex: none;
+        min-width: 150px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #111827;
+        --surface: #1f2937;
+        --text: #f3f4f6;
+        --text-light: #9ca3af;
+        --border: #374151;
+    }
+    
+    .header,
+    .nav-tabs {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .chord-card,
+    .lesson-card,
+    .search-box,
+    .progression-card,
+    .social-section {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    #chordDiagram {
+        background: #1f2937;
+        border-color: var(--border);
+    }
+}
